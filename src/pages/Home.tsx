@@ -48,7 +48,7 @@ const Home = () => {
                             </span>
                         </button>
                         {open && (
-                            <div className="absolute mt-[1.38rem] w-[12rem] bg-white rounded-2xl shadow-lg p-[1.5em] space-y-4">
+                            <div className="absolute mt-[1.38rem] w-[12rem] bg-white rounded-2xl shadow-lg p-[1.5em] space-y-4 right-0">
                                 {options.map((option) => {
                                     const isActive = selected === option;
 
