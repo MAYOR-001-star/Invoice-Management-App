@@ -1,69 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import EmptyInvoice from "./EmptyInvoice";
+import type { Invoice } from "../types/invoice";
 
-type InvoiceProps = {
-    id: string,
-    dueDate: string,
-    amount: number,
-    clientName: string,
-    status: string,
+interface InvoiceListProps {
+    invoices: Invoice[];
 }
 
-const invoicesData: InvoiceProps[] = [
-    {
-        id: "RT3080",
-        dueDate: "19 Aug 2021",
-        amount: 1800.9,
-        clientName: "Jensen Huang",
-        status: "Paid",
-    },
-    {
-        id: "XM9141",
-        dueDate: "20 Sep 2021",
-        amount: 556.0,
-        clientName: "Alex Grim",
-        status: "Pending",
-    },
-    {
-        id: "RG0314",
-        dueDate: "01 Oct 2021",
-        amount: 14002.33,
-        clientName: "John Morrison",
-        status: "Paid",
-    },
-    {
-        id: "RT2080",
-        dueDate: "12 Oct 2021",
-        amount: 102.04,
-        clientName: "Alysa Werner",
-        status: "Pending",
-    },
-    {
-        id: "AA1449",
-        dueDate: "14 Oct 2021",
-        amount: 4032.33,
-        clientName: "Melissa Clarke",
-        status: "Pending",
-    },
-    {
-        id: "TY9141",
-        dueDate: "31 Oct 2021",
-        amount: 6155.91,
-        clientName: "Thomas Wayne",
-        status: "Pending",
-    },
-    {
-        id: "FV2353",
-        dueDate: "12 Nov 2021",
-        amount: 3102.04,
-        clientName: "Anita Wainwright",
-        status: "Draft",
-    },
-];
-
-const InvoiceList = () => {
+const InvoiceList = ({ invoices }: InvoiceListProps) => {
     const navigate = useNavigate()
-    if (invoicesData.length === 0) {
+    
+    if (invoices.length === 0) {
         return (
             <div className="flex justify-center items-center my-[2rem] md:my-[3.44rem] lg:my-[4rem]">
                 <EmptyInvoice />
@@ -73,10 +19,10 @@ const InvoiceList = () => {
 
     return (
         <div className="my-[2rem] md:my-[3.44rem] lg:my-[4rem]">
-            {invoicesData.map((invoice) => {
-                const { id, dueDate, amount, clientName, status } = invoice;
+            {invoices.map((invoice) => {
+                const { id, dates, total, client, status } = invoice;
                 return (
-                    <div key={id} onClick={() => navigate('/detail')} className="grid grid-cols-2 md:grid-cols-[10%_minmax(120px,1fr)_1fr_1fr_auto_auto] items-center mb-[1rem] bg-[#FFFFFF] rounded-lg p-[1.5rem] md:p-[1rem] md:pl-[2rem] shadow-sm border border-transparent hover:border-[#7C5DFA] transition-all cursor-pointer">
+                    <div key={id} onClick={() => navigate(`/detail/${id}`)} className="grid grid-cols-2 md:grid-cols-[10%_minmax(120px,1fr)_1fr_1fr_auto_auto] items-center mb-[1rem] bg-[#FFFFFF] rounded-lg p-[1.5rem] md:p-[1rem] md:pl-[2rem] shadow-sm border border-transparent hover:border-[#7C5DFA] transition-all cursor-pointer">
                         <div className="order-1 md:order-1">
                             <p className="text-[0.94rem] font-bold text-[#0C0E16]">
                                 <span className="text-[#7E88C3]">#</span>{id}
@@ -84,14 +30,14 @@ const InvoiceList = () => {
                         </div>
 
                         <div className="order-2 md:order-3 text-right md:text-left">
-                            <p className="text-[#858BB2] md:text-[#888EB0] text-[0.81rem] font-medium">{clientName}</p>
+                            <p className="text-[#858BB2] md:text-[#888EB0] text-[0.81rem] font-medium">{client.name}</p>
                         </div>
                         <div className="order-3 md:contents flex flex-col gap-2 mt-6 md:mt-0">
                             <p className="text-[#7E88C3] text-[0.81rem] font-medium md:order-2">
-                                <span className="md:hidden">Due </span>{dueDate}
+                                <span className="md:hidden">Due </span>{dates.paymentDue}
                             </p>
                             <p className="text-[#0C0E16] text-[1.25rem] md:text-[1rem] font-bold md:order-4 md:text-right md:pr-10">
-                                {amount.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
+                                {total.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
                             </p>
                         </div>
 

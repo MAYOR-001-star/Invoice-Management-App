@@ -1,87 +1,49 @@
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import GroupBtn from "../components/ui/GroupBtn";
-
-type DetailsProps = {
-    id: string;
-    status: string;
-    description: string;
-    senderAddress: {
-        street: string;
-        city: string;
-        postCode: string;
-        country: string;
-    };
-    client: {
-        name: string;
-        email: string;
-        address: {
-            street: string;
-            city: string;
-            postCode: string;
-            country: string;
-        };
-    };
-    dates: {
-        invoiceDate: string;
-        paymentDue: string;
-    };
-    items: {
-        name: string;
-        quantity: number;
-        price: number;
-        total: number;
-    }[];
-    total: number;
-}
-
-const invoice: DetailsProps = {
-    id: "XM9141",
-    status: "Pending",
-    description: "Graphic Design",
-
-    senderAddress: {
-        street: "19 Union Terrace",
-        city: "London",
-        postCode: "E1 3EZ",
-        country: "United Kingdom",
-    },
-
-    client: {
-        name: "Alex Grim",
-        email: "alexgrim@mail.com",
-        address: {
-            street: "84 Church Way",
-            city: "Bradford",
-            postCode: "BD1 9PB",
-            country: "United Kingdom",
-        },
-    },
-
-    dates: {
-        invoiceDate: "2021 Aug 2021",
-        paymentDue: "2021 Sep 2020",
-    },
-
-    items: [
-        {
-            name: "Banner Design",
-            quantity: 1,
-            price: 156,
-            total: 156,
-        },
-        {
-            name: "Email Design",
-            quantity: 2,
-            price: 200,
-            total: 400,
-        },
-    ],
-
-    total: 556,
-};
-
+import { useState, useEffect } from "react";
+import InvoiceForm from "../components/form/InvoiceForm";
+import { getInvoiceById, deleteInvoice, updateInvoiceStatus, saveInvoice } from "../utils/storage";
+import type { Invoice } from "../types/invoice";
 
 const Detail = () => {
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const [invoice, setInvoice] = useState<Invoice | undefined>(undefined);
+    const [isFormOpen, setIsFormOpen] = useState(false);
+
+    useEffect(() => {
+        if (id) {
+            const data = getInvoiceById(id);
+            if (data) {
+                setInvoice(data);
+            }
+        }
+    }, [id]);
+
+    const handleEdit = () => setIsFormOpen(true);
+    
+    const handleDelete = () => {
+        if (id) {
+            deleteInvoice(id);
+            navigate('/');
+        }
+    };
+
+    const handleMarkPaid = () => {
+        if (id) {
+            updateInvoiceStatus(id, 'Paid');
+            setInvoice(getInvoiceById(id));
+        }
+    };
+
+    const handleSubmit = (data: any) => {
+        saveInvoice(data);
+        setInvoice(getInvoiceById(id!));
+        setIsFormOpen(false);
+    };
+
+    if (!invoice) return <div className="p-10 text-center">Invoice not found</div>;
+
     return (
         <div className="my-[2.06rem] md:my-[3.06rem] lg:my-[4.06rem] max-w-[730px] mx-auto px-6">
             <Link to="/" className="flex justify-start items-center gap-[1.48rem] group">
@@ -105,7 +67,11 @@ const Detail = () => {
                 </div>
 
                 <div className="hidden md:block">
-                    <GroupBtn />
+                    <GroupBtn 
+                        onEdit={handleEdit} 
+                        onDelete={handleDelete}
+                        onMarkPaid={handleMarkPaid}
+                    />
                 </div>
             </div>
 
@@ -204,10 +170,21 @@ const Detail = () => {
             </div>
 
             <div className="md:hidden fixed bottom-0 left-0 w-full bg-white p-[1.5rem] flex items-center justify-center shadow-[0_-10px_20px_rgba(72,84,159,0.1)] z-10">
-                <GroupBtn />
+                <GroupBtn 
+                    onEdit={handleEdit} 
+                    onDelete={handleDelete}
+                    onMarkPaid={handleMarkPaid}
+                />
             </div>
 
             <div className="h-[8rem] md:hidden"></div>
+
+            <InvoiceForm 
+                isOpen={isFormOpen} 
+                onClose={() => setIsFormOpen(false)} 
+                onSubmit={handleSubmit}
+                initialData={invoice}
+            />
         </div>
     )
 }
