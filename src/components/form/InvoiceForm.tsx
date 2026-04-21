@@ -34,7 +34,6 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
 
   const [formData, setFormData] = useState(emptyState);
 
-  // Load initial data for editing
   useEffect(() => {
     if (initialData && isOpen) {
       setFormData({
@@ -103,7 +102,6 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
             </h2>
 
             <form className="flex flex-col gap-10">
-              {/* Bill From */}
               <section className="flex flex-col gap-6">
                 <p className="text-[#7C5DFA] text-[0.81rem] font-bold">Bill From</p>
                 <Input 
@@ -132,7 +130,6 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
                 </div>
               </section>
 
-              {/* Bill To */}
               <section className="flex flex-col gap-6">
                 <p className="text-[#7C5DFA] text-[0.81rem] font-bold">Bill To</p>
                 <Input 
@@ -172,7 +169,6 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
                 </div>
               </section>
 
-              {/* Invoice Meta */}
               <div className="grid md:grid-cols-2 gap-6">
                 <DatePicker 
                   label="Invoice Date" 
@@ -206,7 +202,6 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
             </form>
           </div>
 
-          {/* Sticky Footer */}
           <div className="bg-white p-[2rem] md:px-[3.5rem] flex justify-between items-center shadow-[0_-10px_20px_rgba(72,84,159,0.1)] md:rounded-br-[20px]">
              <div>
                 {!initialData ? (
@@ -229,7 +224,6 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
                     <Button 
                       text="Save as Draft" 
                       onClick={() => {
-                        handleFormSubmit(); // Logic for Draft can be added later
                       }}
                       className="bg-[#373B53] text-[#888EB0] hover:bg-[#1E2139]"
                     />

@@ -39,10 +39,10 @@ const Home = () => {
         const newInvoice: Invoice = {
             ...data,
             id: generateId(),
-            status: "Pending" // Default for new invoices
+            status: "Pending" 
         };
         saveInvoice(newInvoice);
-        setInvoices(getInvoices()); // Refresh list
+        setInvoices(getInvoices()); 
         setIsFormOpen(false);
     };
 

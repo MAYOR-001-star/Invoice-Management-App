@@ -2,6 +2,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import GroupBtn from "../components/ui/GroupBtn";
 import { useState, useEffect } from "react";
 import InvoiceForm from "../components/form/InvoiceForm";
+import DeleteModal from "../components/ui/DeleteModal";
 import { getInvoiceById, deleteInvoice, updateInvoiceStatus, saveInvoice } from "../utils/storage";
 import type { Invoice } from "../types/invoice";
 
@@ -10,6 +11,7 @@ const Detail = () => {
     const navigate = useNavigate();
     const [invoice, setInvoice] = useState<Invoice | undefined>(undefined);
     const [isFormOpen, setIsFormOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     useEffect(() => {
         if (id) {
@@ -22,7 +24,7 @@ const Detail = () => {
 
     const handleEdit = () => setIsFormOpen(true);
     
-    const handleDelete = () => {
+    const confirmDelete = () => {
         if (id) {
             deleteInvoice(id);
             navigate('/');
@@ -69,7 +71,7 @@ const Detail = () => {
                 <div className="hidden md:block">
                     <GroupBtn 
                         onEdit={handleEdit} 
-                        onDelete={handleDelete}
+                        onDelete={() => setIsDeleteModalOpen(true)}
                         onMarkPaid={handleMarkPaid}
                     />
                 </div>
@@ -97,7 +99,6 @@ const Detail = () => {
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 mt-[2.5rem] md:mt-[3rem]">
-                    {/* Dates Column */}
                     <div className="flex flex-col gap-8">
                         <div className="flex flex-col gap-2">
                             <p className="text-[#7E88C3] text-[0.81rem] font-medium">Invoice Date</p>
@@ -109,7 +110,6 @@ const Detail = () => {
                         </div>
                     </div>
 
-                    {/* Bill To Column */}
                     <div className="flex flex-col gap-3">
                         <p className="text-[#7E88C3] text-[0.81rem] font-medium">Bill To</p>
                         <p className="text-[#0C0E16] text-[0.94rem] font-bold mb-1">{invoice.client.name}</p>
@@ -121,7 +121,6 @@ const Detail = () => {
                         </p>
                     </div>
 
-                    {/* Sent to Column - Spans on Mobile */}
                     <div className="flex flex-col gap-2 col-span-2 md:col-span-1 mt-2 md:mt-0">
                         <p className="text-[#7E88C3] text-[0.81rem] font-medium">Sent to</p>
                         <p className="text-[#0C0E16] text-[0.94rem] font-bold break-all">{invoice.client.email}</p>
@@ -136,7 +135,6 @@ const Detail = () => {
                         <p className="text-right">Total</p>
                     </div>
 
-                    {/* Items List */}
                     <div className="flex flex-col gap-6 md:gap-8">
                         {invoice.items.map((item, index) => (
                             <div key={index} className="grid grid-cols-2 md:grid-cols-[3fr_1fr_1fr_1fr] items-center">
@@ -172,7 +170,7 @@ const Detail = () => {
             <div className="md:hidden fixed bottom-0 left-0 w-full bg-white p-[1.5rem] flex items-center justify-center shadow-[0_-10px_20px_rgba(72,84,159,0.1)] z-10">
                 <GroupBtn 
                     onEdit={handleEdit} 
-                    onDelete={handleDelete}
+                    onDelete={() => setIsDeleteModalOpen(true)}
                     onMarkPaid={handleMarkPaid}
                 />
             </div>
@@ -184,6 +182,13 @@ const Detail = () => {
                 onClose={() => setIsFormOpen(false)} 
                 onSubmit={handleSubmit}
                 initialData={invoice}
+            />
+
+            <DeleteModal 
+                isOpen={isDeleteModalOpen} 
+                onClose={() => setIsDeleteModalOpen(false)} 
+                onConfirm={confirmDelete} 
+                invoiceId={invoice.id}
             />
         </div>
     )

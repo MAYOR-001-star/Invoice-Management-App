@@ -22,7 +22,6 @@ const DatePicker = ({ label, ...props }: DatePickerProps) => {
           className="w-full bg-white border border-[#DFE3FA] rounded-[4px] px-[1.25rem] py-[1.06rem] text-[#0C0E16] text-[0.94rem] font-bold outline-none transition-all focus:border-[#7C5DFA] hover:border-[#7C5DFA] cursor-pointer appearance-none"
           {...props}
         />
-        {/* Using the filter-dropdown icon as a placeholder if a calendar icon is missing, or just a custom SVG */}
         <svg
           className="absolute right-[1.25rem] top-1/2 -translate-y-1/2 pointer-events-none w-4 h-4 fill-[#7E88C3]"
           viewBox="0 0 24 24"

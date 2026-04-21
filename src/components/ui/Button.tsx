@@ -3,7 +3,6 @@ type ButtonProps = {
     mobileText?: string;
     onClick: () => void;
     variant?: string;
-    // styling?: string;
 }
 
 const Button = ({ text, mobileText, onClick, variant }: ButtonProps) => {
