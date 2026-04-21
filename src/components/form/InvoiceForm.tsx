@@ -33,6 +33,7 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
   };
 
   const [formData, setFormData] = useState(emptyState);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     if (initialData && isOpen) {
@@ -45,13 +46,22 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
         items: initialData.items.map((item: any) => ({ ...item })),
         total: initialData.total
       });
+      setErrors({});
     } else if (!initialData && isOpen) {
       setFormData(emptyState);
+      setErrors({});
     }
   }, [initialData, isOpen]);
 
   const handleChange = (field: string, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    }
   };
 
   const handleNestedChange = (parent: string, field: string, value: any) => {
@@ -59,6 +69,14 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
       ...prev,
       [parent]: { ...prev[parent], [field]: value }
     }));
+    const errorKey = `${parent}.${field}`;
+    if (errors[errorKey]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[errorKey];
+        return newErrors;
+      });
+    }
   };
 
   const handleClientAddressChange = (field: string, value: string) => {
@@ -69,18 +87,62 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
         address: { ...prev.client.address, [field]: value }
       }
     }));
+    const errorKey = `client.address.${field}`;
+    if (errors[errorKey]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[errorKey];
+        return newErrors;
+      });
+    }
   };
 
   const calculateTotal = () => {
     return formData.items.reduce((sum, item) => sum + item.total, 0);
   };
 
-  const handleFormSubmit = () => {
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.senderAddress.street) newErrors['senderAddress.street'] = "can't be empty";
+    if (!formData.senderAddress.city) newErrors['senderAddress.city'] = "can't be empty";
+    if (!formData.senderAddress.postCode) newErrors['senderAddress.postCode'] = "can't be empty";
+    if (!formData.senderAddress.country) newErrors['senderAddress.country'] = "can't be empty";
+
+    if (!formData.client.name) newErrors['client.name'] = "can't be empty";
+    if (!formData.client.email) newErrors['client.email'] = "can't be empty";
+    if (!formData.client.address.street) newErrors['client.address.street'] = "can't be empty";
+    if (!formData.client.address.city) newErrors['client.address.city'] = "can't be empty";
+    if (!formData.client.address.postCode) newErrors['client.address.postCode'] = "can't be empty";
+    if (!formData.client.address.country) newErrors['client.address.country'] = "can't be empty";
+
+    if (!formData.description) newErrors['description'] = "can't be empty";
+    if (!formData.dates.invoiceDate) newErrors['dates.invoiceDate'] = "can't be empty";
+
+    if (formData.items.length === 0) {
+      newErrors['items'] = "An item must be added";
+    } else {
+      formData.items.forEach((item, index) => {
+        if (!item.name || !item.quantity || !item.price) {
+          newErrors[`item-${index}`] = "All fields must be added";
+        }
+      });
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleFormSubmit = (isDraft = false) => {
+    if (!isDraft && !validateForm()) {
+      return;
+    }
+
     const finalData = {
       ...formData,
       total: calculateTotal(),
       id: initialData?.id,
-      status: initialData?.status || 'Pending'
+      status: isDraft ? 'Draft' : (initialData?.status === 'Draft' ? 'Pending' : (initialData?.status || 'Pending'))
     };
     onSubmit(finalData);
   };
@@ -108,23 +170,27 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
                   label="Street Address" 
                   value={formData.senderAddress.street} 
                   onChange={(e) => handleNestedChange('senderAddress', 'street', e.target.value)} 
+                  error={errors['senderAddress.street']}
                 />
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                   <Input 
                     label="City" 
                     value={formData.senderAddress.city} 
                     onChange={(e) => handleNestedChange('senderAddress', 'city', e.target.value)} 
+                    error={errors['senderAddress.city']}
                   />
                   <Input 
                     label="Post Code" 
                     value={formData.senderAddress.postCode} 
                     onChange={(e) => handleNestedChange('senderAddress', 'postCode', e.target.value)} 
+                    error={errors['senderAddress.postCode']}
                   />
                   <div className="col-span-2 md:col-span-1">
                     <Input 
                       label="Country" 
                       value={formData.senderAddress.country} 
                       onChange={(e) => handleNestedChange('senderAddress', 'country', e.target.value)} 
+                      error={errors['senderAddress.country']}
                     />
                   </div>
                 </div>
@@ -136,34 +202,40 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
                   label="Client's Name" 
                   value={formData.client.name} 
                   onChange={(e) => handleNestedChange('client', 'name', e.target.value)} 
+                  error={errors['client.name']}
                 />
                 <Input 
                   label="Client's Email" 
                   value={formData.client.email} 
                   onChange={(e) => handleNestedChange('client', 'email', e.target.value)} 
                   placeholder="e.g. email@example.com"
+                  error={errors['client.email']}
                 />
                 <Input 
                   label="Street Address" 
                   value={formData.client.address.street} 
                   onChange={(e) => handleClientAddressChange('street', e.target.value)} 
+                  error={errors['client.address.street']}
                 />
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                   <Input 
                     label="City" 
                     value={formData.client.address.city} 
                     onChange={(e) => handleClientAddressChange('city', e.target.value)} 
+                    error={errors['client.address.city']}
                   />
                   <Input 
                     label="Post Code" 
                     value={formData.client.address.postCode} 
                     onChange={(e) => handleClientAddressChange('postCode', e.target.value)} 
+                    error={errors['client.address.postCode']}
                   />
                   <div className="col-span-2 md:col-span-1">
                     <Input 
                       label="Country" 
                       value={formData.client.address.country} 
                       onChange={(e) => handleClientAddressChange('country', e.target.value)} 
+                      error={errors['client.address.country']}
                     />
                   </div>
                 </div>
@@ -193,6 +265,7 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
                 value={formData.description} 
                 onChange={(e) => handleChange('description', e.target.value)} 
                 placeholder="e.g. Graphic Design Service"
+                error={errors['description']}
               />
 
               <ItemList 
@@ -200,6 +273,16 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
                 onChange={(items) => handleChange('items', items)} 
               />
             </form>
+          </div>
+
+          <div className="flex flex-col px-[1.5rem] md:px-[2.5rem] lg:px-[3.5rem] gap-2 mb-4">
+              {Object.values(errors).length > 0 && (
+                  <div className="text-[#EC5757] text-[0.63rem] font-semibold flex flex-col gap-1">
+                      {errors['items'] && <p>- {errors['items']}</p>}
+                      {Object.keys(errors).some(k => k.startsWith('item-')) && <p>- All fields must be added</p>}
+                      {Object.keys(errors).some(k => k.includes('.') || k === 'description') && <p>- All fields must be added</p>}
+                  </div>
+              )}
           </div>
 
           <div className="bg-white p-[2rem] md:px-[3.5rem] flex justify-between items-center shadow-[0_-10px_20px_rgba(72,84,159,0.1)] md:rounded-br-[20px]">
@@ -223,14 +306,13 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
                 {!initialData && (
                     <Button 
                       text="Save as Draft" 
-                      onClick={() => {
-                      }}
+                      onClick={() => handleFormSubmit(true)}
                       className="bg-[#373B53] text-[#888EB0] hover:bg-[#1E2139]"
                     />
                 )}
                 <Button 
                   text={initialData ? "Save Changes" : "Save & Send"} 
-                  onClick={handleFormSubmit}
+                  onClick={() => handleFormSubmit(false)}
                 />
              </div>
           </div>

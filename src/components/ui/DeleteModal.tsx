@@ -21,16 +21,15 @@ const DeleteModal = ({ isOpen, onClose, onConfirm, invoiceId }: DeleteModalProps
             Are you sure you want to delete invoice #{invoiceId}? This action cannot be undone.
           </p>
           <div className="flex justify-end gap-2">
-            <Button 
-                text="Cancel" 
-                variant="edit" 
-                onClick={onClose} 
-                className="bg-[#F9FAFE] text-[#7E88C3] hover:bg-[#DFE3FA]"
+            <Button
+              text="Cancel"
+              variant="edit"
+              onClick={onClose}
             />
-            <Button 
-                text="Delete" 
-                onClick={onConfirm} 
-                className="bg-[#EC5757] text-white hover:bg-[#FF9797]"
+            <Button
+              text="Delete"
+              variant='delete'
+              onClick={onConfirm}
             />
           </div>
         </div>
