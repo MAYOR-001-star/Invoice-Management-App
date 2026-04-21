@@ -35,7 +35,7 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
       <h3 className="text-[#777F98] text-[1.13rem] font-bold tracking-[-0.38px]">Item List</h3>
 
       <div className="flex flex-col gap-12 md:gap-4">
-        <div className="hidden md:grid grid-cols-[3fr_1fr_1.5fr_1fr_auto] gap-4 text-[#7E88C3] text-[0.81rem] font-medium px-1">
+        <div className="hidden md:grid grid-cols-[3fr_1fr_1.5fr_1fr_auto] gap-4 text-[var(--color-text-accent)] text-[0.81rem] font-medium px-1">
           <p>Item Name</p>
           <p>Qty.</p>
           <p>Price</p>
@@ -78,8 +78,8 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
             </div>
 
             <div className="flex flex-col gap-[1rem] justify-center h-full pb-[1.06rem] md:pb-0">
-              {index === 0 && <p className="text-[#7E88C3] text-[0.81rem] font-medium md:hidden mb-[1.25rem]">Total</p>}
-              <p className="font-bold text-[#7E88C3] text-[0.94rem] pt-[1.06rem] md:pt-0 truncate">
+              {index === 0 && <p className="text-[var(--color-text-accent)] text-[0.81rem] font-medium md:hidden mb-[1.25rem]">Total</p>}
+              <p className="font-bold text-[var(--color-text-accent)] text-[0.94rem] pt-[1.06rem] md:pt-0 truncate">
                 {item.total.toFixed(2)}
               </p>
             </div>
@@ -87,7 +87,7 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
             <button
               type="button"
               onClick={() => deleteItem(index)}
-              className="p-3 mb-2 md:mb-0 text-[#7E88C3] hover:text-[#EC5757] transition-colors"
+              className="p-3 mb-2 md:mb-0 text-[var(--color-text-accent)] hover:text-[#EC5757] transition-colors"
               aria-label="Delete item"
             >
               <svg width="13" height="16" viewBox="0 0 13 16" fill="currentColor">
@@ -101,7 +101,7 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
       <Button
         text="+ Add New Item"
         onClick={addItem}
-        className="w-full bg-[#F9FAFE] text-[#7E88C3] hover:bg-[#DFE3FA] py-[1.06rem] font-bold"
+        className="w-full bg-[var(--color-faded-bg)] text-[var(--color-text-accent)] hover:bg-[#DFE3FA] py-[1.06rem] font-bold transition-colors duration-300"
       />
     </div>
   );

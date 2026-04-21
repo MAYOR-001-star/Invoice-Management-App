@@ -62,8 +62,8 @@ const Home = () => {
         <div className="max-w-[730px] mx-auto px-6">
             <div className="flex justify-between items-center mt-[3.41rem] lg:mt-[4.81rem] mb-[4rem]">
                 <div className="flex flex-col justify-between items-start">
-                    <h1 className="font-bold text-[#0C0E16] text-[1.5rem] md:text-[2.25rem]">Invoices</h1>
-                    <p className="text-[#888EB0] text-[0.81rem] font-medium">
+                    <h1 className="font-bold text-[var(--color-text-primary)] text-[1.5rem] md:text-[2.25rem]">Invoices</h1>
+                    <p className="text-[var(--color-text-secondary)] text-[0.81rem] font-medium">
                         <span className="hidden md:inline">There are </span>{filteredInvoices.length} invoices
                     </p>
                 </div>
@@ -73,16 +73,16 @@ const Home = () => {
                             onClick={() => setOpen(!open)}
                             className="flex justify-center items-center gap-[1rem] lg:gap-[0.88rem]"
                         >
-                            <span className="font-bold text-[#0C0E16] text-[0.94rem]">
+                            <span className="font-bold text-[var(--color-text-primary)] text-[0.94rem]">
                                 <span className="md:hidden">Filter</span>
                                 <span className="hidden md:inline">Filter by status</span>
                             </span>
                             <span className="flex justify-center items-center cursor-pointer">
-                                <img src="/filter-dropdown.svg" alt="arrow-down" className="size-4 flex-shrink-0" />
+                                <img src="/filter-dropdown.svg" alt="arrow-down" className={`size-4 flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
                             </span>
                         </button>
                         {open && (
-                            <div className="absolute mt-[1.38rem] w-[12rem] bg-white rounded-2xl shadow-lg p-[1.5em] space-y-4 right-0 z-20">
+                            <div className="absolute mt-[1.38rem] w-[12rem] bg-[var(--color-surface)] rounded-2xl shadow-lg p-[1.5em] space-y-4 right-0 z-20">
                                 {statuses.map((status) => {
                                     const isActive = selectedFilters.includes(status);
 
@@ -101,7 +101,7 @@ const Home = () => {
                                                 className={`w-4 h-4 rounded-[2px] flex items-center justify-center border border-transparent transition-all
                                                     ${isActive
                                                         ? "bg-[#7C5DFA] border-[#7C5DFA]"
-                                                        : "bg-[#DFE3FA] group-hover:border-[#7C5VFA]"
+                                                        : "bg-[var(--color-field-border)] group-hover:border-[#7C5DFA]"
                                                     }`}
                                             >
                                                 {isActive && (
@@ -111,7 +111,7 @@ const Home = () => {
                                                 )}
                                             </div>
 
-                                            <span className="text-[0.94rem] font-bold text-[#0C0E16]">
+                                            <span className="text-[0.94rem] font-bold text-[var(--color-text-primary)]">
                                                 {status}
                                             </span>
                                         </label>

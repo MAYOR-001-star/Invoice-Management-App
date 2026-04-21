@@ -11,7 +11,7 @@ const Button = ({ text, mobileText, onClick, variant }: ButtonProps) => {
             onClick={onClick}
             className={`cursor-pointer flex justify-center items-center transition-colors rounded-full hover:opacity-75
                 ${variant === 'invoice' ? 'p-[0.5em] pr-[1.06em] gap-4' : 'px-6 py-4'} 
-                ${variant === 'edit' ? 'bg-[#F9FAFE] text-[#7E88C3]' : variant === 'delete' ? 'bg-[#EC5757] text-[#FFFFFF]' : 'bg-[#7C5DFA] text-[#FFFFFF]'}
+                ${variant === 'edit' ? 'bg-[var(--color-faded-bg)] text-[var(--color-text-accent)] hover:bg-[var(--color-field-border)] transition-colors' : variant === 'delete' ? 'bg-[#EC5757] text-[#FFFFFF] hover:bg-[#FF9797] transition-colors' : 'bg-[#7C5DFA] text-[#FFFFFF] hover:bg-[#9277FF] transition-colors'}
             `}
         >
             {variant === 'invoice' &&

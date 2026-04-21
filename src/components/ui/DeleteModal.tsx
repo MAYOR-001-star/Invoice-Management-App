@@ -15,9 +15,9 @@ const DeleteModal = ({ isOpen, onClose, onConfirm, invoiceId }: DeleteModalProps
     <>
       <Backdrop isOpen={isOpen} onClick={onClose} />
       <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
-        <div className="bg-white rounded-lg p-8 md:p-12 max-w-[480px] w-full shadow-2xl animate-in fade-in zoom-in duration-300">
-          <h2 className="text-[#0C0E16] text-[1.5rem] font-bold mb-3 tracking-[-0.5px]">Confirm Deletion</h2>
-          <p className="text-[#888EB0] text-[0.81rem] font-medium leading-6 mb-4">
+        <div className="bg-[var(--color-surface)] w-full max-w-[30rem] p-[2rem] md:p-[3rem] rounded-lg shadow-xl z-50 transition-colors duration-300">
+          <h2 className="text-[var(--color-text-primary)] text-[1.5rem] font-bold mb-[0.81rem]">Confirm Deletion</h2>
+          <p className="text-[var(--color-text-accent)] text-[0.81rem] font-medium leading-[1.38rem] mb-[1rem]">
             Are you sure you want to delete invoice #{invoiceId}? This action cannot be undone.
           </p>
           <div className="flex justify-end gap-2">

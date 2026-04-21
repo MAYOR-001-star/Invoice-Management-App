@@ -32,10 +32,10 @@ const Input = ({ label, error, hideLabel, ...props }: InputProps) => {
       )}
       <input
         id={inputId}
-        className={`w-full bg-white border rounded-[4px] px-[1.25rem] py-[1.06rem] text-[#0C0E16] text-[0.94rem] font-bold outline-none transition-all placeholder:text-[#0C0E16] placeholder:opacity-40
+        className={`w-full bg-[var(--color-field-bg)] border rounded-[4px] px-[1.25rem] py-[1.06rem] text-[var(--color-text-primary)] text-[0.94rem] font-bold outline-none transition-all placeholder:text-[var(--color-text-primary)] placeholder:opacity-40
           ${error 
             ? 'border-[#EC5757] focus:border-[#EC5757]' 
-            : 'border-[#DFE3FA] focus:border-[#7C5DFA] hover:border-[#7C5DFA]'
+            : 'border-[var(--color-field-border)] focus:border-[#7C5DFA] hover:border-[#7C5DFA]'
           }
         `}
         {...props}

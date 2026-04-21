@@ -2,7 +2,36 @@
 
 @import "tailwindcss";
 
+:root {
+  --color-bg: #F8F8FB;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #0C0E16;
+  --color-text-secondary: #888EB0;
+  --color-text-accent: #7E88C3;
+  --color-field-bg: #FFFFFF;
+  --color-field-border: #DFE3FA;
+  --color-faded-bg: #F9FAFE;
+  
+  --color-primary: #7C5DFA;
+  --color-primary-light: #9277FF;
+  --color-error: #EC5757;
+  --color-error-light: #9277FF;
+}
+
 body {
   font-family: 'League Spartan';
-  background-color: #F8F8FB;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark {
+  --color-bg: #141625;
+  --color-surface: #1E2139;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #DFE3FA;
+  --color-text-accent: #DFE3FA;
+  --color-field-bg: #1E2139;
+  --color-field-border: #252945;
+  --color-faded-bg: #252945;
 }

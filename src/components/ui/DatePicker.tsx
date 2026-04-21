@@ -19,7 +19,7 @@ const DatePicker = ({ label, ...props }: DatePickerProps) => {
         <input
           id={inputId}
           type="date"
-          className="w-full bg-white border border-[#DFE3FA] rounded-[4px] px-[1.25rem] py-[1.06rem] text-[#0C0E16] text-[0.94rem] font-bold outline-none transition-all focus:border-[#7C5DFA] hover:border-[#7C5DFA] cursor-pointer appearance-none"
+          className="w-full bg-[var(--color-field-bg)] border border-[var(--color-field-border)] rounded-[4px] px-[1.25rem] py-[1.06rem] text-[var(--color-text-primary)] text-[0.94rem] font-bold outline-none transition-all focus:border-[#7C5DFA] hover:border-[#7C5DFA] cursor-pointer appearance-none"
           {...props}
         />
         <svg

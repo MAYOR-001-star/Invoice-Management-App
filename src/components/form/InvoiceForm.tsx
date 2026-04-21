@@ -151,13 +151,13 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
     <>
       <Backdrop isOpen={isOpen} onClick={onClose} />
       
-      <div className={`fixed top-[4.5rem] md:top-[5rem] lg:top-0 left-0 lg:left-[6.44rem] z-40 w-full max-w-[719px] h-[calc(100vh-4.5rem)] md:h-[calc(100vh-5rem)] lg:h-screen bg-white transition-transform duration-500 ease-in-out transform ${
+      <div className={`fixed top-[4.5rem] md:top-[5rem] lg:top-0 left-0 lg:left-[6.44rem] z-40 w-full max-w-[719px] h-[calc(100vh-4.5rem)] md:h-[calc(100vh-5rem)] lg:h-screen bg-[var(--color-bg)] transition-transform duration-500 ease-in-out transform ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       } shadow-2xl overflow-hidden lg:rounded-r-[20px]`}>
         
         <div className="h-full flex flex-col pt-[1rem] md:pt-[2rem] lg:pt-[3.5rem]">
           <div className="flex-1 overflow-y-auto px-[1.5rem] md:px-[2.5rem] lg:px-[3.5rem] pb-[2rem]">
-            <h2 className="text-[#0C0E16] text-[1.5rem] font-bold tracking-[-0.5px] uppercase mb-[3rem]">
+            <h2 className="text-[var(--color-text-primary)] text-[1.5rem] font-bold tracking-[-0.5px] uppercase mb-[3rem]">
               {initialData ? (
                 <>Edit <span className="text-[#7E88C3]">#</span>{initialData.id}</>
               ) : 'New Invoice'}
@@ -285,7 +285,7 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
               )}
           </div>
 
-          <div className="bg-white p-[2rem] md:px-[3.5rem] flex justify-between items-center shadow-[0_-10px_20px_rgba(72,84,159,0.1)] md:rounded-br-[20px]">
+          <div className="bg-[var(--color-surface)] p-[2rem] md:px-[3.5rem] flex justify-between items-center shadow-[0_-10px_20px_rgba(72,84,159,0.1)] md:rounded-br-[20px] transition-colors duration-300">
              <div>
                 {!initialData ? (
                     <Button 

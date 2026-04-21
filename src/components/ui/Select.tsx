@@ -43,7 +43,7 @@ const Select = ({ label, options, value, onChange }: SelectProps) => {
             setIsOpen(!isOpen);
           }
         }}
-        className={`w-full bg-white border border-[#DFE3FA] rounded-[4px] px-[1.25rem] py-[1.06rem] text-[#0C0E16] text-[0.94rem] font-bold flex justify-between items-center transition-all outline-none hover:border-[#7C5DFA] focus:border-[#7C5DFA] ${
+        className={`w-full bg-[var(--color-field-bg)] border border-[var(--color-field-border)] rounded-[4px] px-[1.25rem] py-[1.06rem] text-[var(--color-text-primary)] text-[0.94rem] font-bold flex justify-between items-center transition-all outline-none hover:border-[#7C5DFA] focus:border-[#7C5DFA] ${
           isOpen ? 'border-[#7C5DFA]' : ''
         }`}
       >
@@ -56,7 +56,7 @@ const Select = ({ label, options, value, onChange }: SelectProps) => {
       </button>
 
       {isOpen && (
-        <div className="absolute top-[calc(100%+0.5rem)] left-0 w-full bg-white rounded-lg shadow-[0_10px_20px_rgba(72,84,159,0.25)] overflow-hidden z-20">
+        <div className="absolute top-[calc(100%+0.5rem)] left-0 w-full bg-[var(--color-surface)] rounded-lg shadow-[0_10px_20px_rgba(72,84,159,0.25)] overflow-hidden z-20 transition-colors duration-300">
           {options.map((option) => (
             <button
               key={option.value}
@@ -65,8 +65,8 @@ const Select = ({ label, options, value, onChange }: SelectProps) => {
                 onChange(option.value);
                 setIsOpen(false);
               }}
-              className={`w-full text-left px-[1.5rem] py-[1rem] text-[0.94rem] font-bold border-b border-[#DFE3FA] last:border-b-0 hover:text-[#7C5DFA] transition-colors outline-none focus:bg-[#F9FAFE] ${
-                option.value === value ? 'text-[#7C5DFA]' : 'text-[#0C0E16]'
+              className={`w-full text-left px-[1.5rem] py-[1rem] text-[0.94rem] font-bold border-b border-[var(--color-field-border)] last:border-b-0 hover:text-[#7C5DFA] transition-colors outline-none focus:bg-[var(--color-bg)] ${
+                option.value === value ? 'text-[#7C5DFA]' : 'text-[var(--color-text-primary)]'
               }`}
             >
               {option.label}
