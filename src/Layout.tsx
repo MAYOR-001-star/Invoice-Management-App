@@ -5,8 +5,8 @@ const Layout = () => {
     return (
         <div className="flex flex-col lg:flex-row min-h-screen">
             <Sidebar />
-            <main className="flex-1 p-8 lg:p-18 overflow-y-auto">
-                <div className="max-w-[730px] mx-auto w-full">
+            <main className="flex-1 overflow-y-auto">
+                <div className="w-full">
                     <Outlet />
                 </div>
             </main>
