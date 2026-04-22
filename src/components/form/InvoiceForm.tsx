@@ -303,13 +303,13 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
              </div>
              
              <div className="flex gap-2">
-                {!initialData && (
-                    <Button 
-                      text="Save as Draft" 
-                      onClick={() => handleFormSubmit(true)}
-                      className="bg-[#373B53] text-[#888EB0] hover:bg-[#1E2139]"
-                    />
-                )}
+                 {!initialData && (
+                     <Button 
+                       text="Save as Draft" 
+                       onClick={() => handleFormSubmit(true)}
+                       variant="dark"
+                     />
+                 )}
                 <Button 
                   text={initialData ? "Save Changes" : "Save & Send"} 
                   onClick={() => handleFormSubmit(false)}
