@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import EmptyInvoice from "./EmptyInvoice";
 import type { Invoice } from "../types/invoice";
 import { Link } from "react-router-dom";
@@ -8,7 +7,6 @@ interface InvoiceListProps {
 }
 
 const InvoiceList = ({ invoices }: InvoiceListProps) => {
-    const navigate = useNavigate()
     
     if (invoices.length === 0) {
         return (
