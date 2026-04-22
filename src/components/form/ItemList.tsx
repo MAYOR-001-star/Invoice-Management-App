@@ -32,9 +32,10 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
 
   return (
     <div className="flex flex-col gap-6 mt-8">
-      <h3 className="text-[#777F98] text-[1.13rem] font-bold tracking-[-0.38px]">Item List</h3>
+      <h3 className="text-[#777F98] dark:text-[#7E88C3] text-[1.13rem] font-bold tracking-[-0.38px]">Item List</h3>
 
       <div className="flex flex-col gap-12 md:gap-4">
+        {/* Desktop Headers */}
         <div className="hidden md:grid grid-cols-[3fr_1fr_1.5fr_1fr_auto] gap-4 text-[var(--color-text-accent)] text-[0.81rem] font-medium px-1">
           <p>Item Name</p>
           <p>Qty.</p>
@@ -45,20 +46,22 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
 
         {items.map((item, index) => (
           <div key={index} className="grid grid-cols-[1fr_1.5fr_1fr_auto] md:grid-cols-[3fr_1fr_1.5fr_1fr_auto] gap-4 items-end md:items-center">
+            {/* Item Name - full width on mobile */}
             <div className="col-span-4 md:col-span-1">
               <Input
-                label={index === 0 ? "Item Name" : ""}
-                hideLabel={index > 0}
+                label="Item Name"
+                hideLabelOnDesktop={true}
                 value={item.name}
                 onChange={(e) => handleItemChange(index, 'name', e.target.value)}
                 autoComplete="off"
               />
             </div>
 
+            {/* Quantity */}
             <div className="md:col-span-1">
               <Input
-                label={index === 0 ? "Qty." : ""}
-                hideLabel={index > 0}
+                label="Qty."
+                hideLabelOnDesktop={true}
                 type="number"
                 min="0"
                 value={item.quantity}
@@ -66,10 +69,11 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
               />
             </div>
 
+            {/* Price */}
             <div className="md:col-span-1">
               <Input
-                label={index === 0 ? "Price" : ""}
-                hideLabel={index > 0}
+                label="Price"
+                hideLabelOnDesktop={true}
                 type="number"
                 step="0.01"
                 value={item.price}
@@ -77,23 +81,27 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
               />
             </div>
 
-            <div className="flex flex-col gap-[1rem] justify-center h-full pb-[1.06rem] md:pb-0">
-              {index === 0 && <p className="text-[var(--color-text-accent)] text-[0.81rem] font-medium md:hidden mb-[1.25rem]">Total</p>}
-              <p className="font-bold text-[var(--color-text-accent)] text-[0.94rem] pt-[1.06rem] md:pt-0 truncate">
-                {item.total.toFixed(2)}
-              </p>
+            {/* Total Display */}
+            <div className="flex flex-col gap-[0.63rem] h-full justify-end md:justify-center">
+              <p className="text-[var(--color-text-accent)] text-[0.81rem] font-medium md:hidden mb-2">Total</p>
+              <div className="h-[3rem] md:h-auto flex items-center">
+                <p className="font-bold text-[var(--color-text-accent)] text-[0.94rem] truncate">
+                  {item.total.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </p>
+              </div>
             </div>
 
-            <button
-              type="button"
-              onClick={() => deleteItem(index)}
-              className="p-3 mb-2 md:mb-0 text-[var(--color-text-accent)] hover:text-[#EC5757] transition-colors"
-              aria-label="Delete item"
-            >
-              <svg width="13" height="16" viewBox="0 0 13 16" fill="currentColor">
-                <path d="M11.583 3.556v10.667c0 .896-.728 1.623-1.623 1.623H3.04c-.896 0-1.623-.727-1.623-1.623V3.556h10.166zm-2.032-3.556A1.018 1.018 0 0 1 10.567 1h2.433v2.028H0V1h2.433a1.018 1.018 0 0 1 1.016-1h6.102z" />
-              </svg>
-            </button>
+            {/* Delete Button */}
+            <div className="h-full flex items-end md:items-center pb-3 md:pb-0">
+                <button
+                  type="button"
+                  onClick={() => deleteItem(index)}
+                  className="text-[var(--color-text-accent)] hover:text-[#EC5757] transition-colors"
+                  aria-label="Delete item"
+                >
+                  <img src="/delete-item-icon.svg" alt="delete" className="w-[0.81rem] h-[1rem] cursor-pointer" />
+                </button>
+            </div>
           </div>
         ))}
       </div>
@@ -101,7 +109,7 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
       <Button
         text="+ Add New Item"
         onClick={addItem}
-        className="w-full bg-[var(--color-faded-bg)] text-[var(--color-text-accent)] hover:bg-[#DFE3FA] py-[1.06rem] font-bold transition-colors duration-300"
+        className="w-full bg-[#F9FAFE] dark:bg-[#252945] text-[#7E88C3] hover:bg-[#DFE3FA] dark:hover:bg-[#1E2139] py-[1.06rem] font-bold transition-colors duration-300 cursor-pointer"
       />
     </div>
   );

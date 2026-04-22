@@ -4,15 +4,16 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
   hideLabel?: boolean;
+  hideLabelOnDesktop?: boolean;
 }
 
-const Input = ({ label, error, hideLabel, ...props }: InputProps) => {
+const Input = ({ label, error, hideLabel, hideLabelOnDesktop, ...props }: InputProps) => {
   const inputId = React.useId();
 
   return (
     <div className="flex flex-col gap-[0.63rem] w-full group">
       {(label || error) && (
-        <div className={`flex justify-between items-center ${hideLabel ? 'sr-only' : ''}`}>
+        <div className={`flex justify-between items-center ${hideLabel ? 'sr-only' : ''} ${hideLabelOnDesktop ? 'md:sr-only' : ''}`}>
           {label && (
             <label 
               htmlFor={inputId} 

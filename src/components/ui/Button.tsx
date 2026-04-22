@@ -3,15 +3,19 @@ type ButtonProps = {
     mobileText?: string;
     onClick: () => void;
     variant?: string;
+    className?: string;
 }
 
-const Button = ({ text, mobileText, onClick, variant }: ButtonProps) => {
+const Button = ({ text, mobileText, onClick, variant, className }: ButtonProps) => {
     return (
         <button
+            type="button"
             onClick={onClick}
-            className={`cursor-pointer flex justify-center items-center transition-colors rounded-full hover:opacity-75
-                ${variant === 'invoice' ? 'p-[0.5em] pr-[1.06em] gap-4' : 'px-6 py-4'} 
-                ${variant === 'edit' ? 'bg-[var(--color-faded-bg)] text-[var(--color-text-accent)] hover:bg-[var(--color-field-border)] transition-colors' : variant === 'delete' ? 'bg-[#EC5757] text-[#FFFFFF] hover:bg-[#FF9797] transition-colors' : 'bg-[#7C5DFA] text-[#FFFFFF] hover:bg-[#9277FF] transition-colors'}
+            className={`cursor-pointer flex justify-center items-center transition-all rounded-full
+                ${!className?.includes('hover:') ? 'hover:opacity-80' : ''}
+                ${!className && (variant === 'invoice' ? 'p-[0.5em] pr-[1.06em] gap-4' : 'px-6 py-4')} 
+                ${!className && (variant === 'edit' ? 'bg-[var(--color-faded-bg)] text-[var(--color-text-accent)] hover:bg-[var(--color-field-border)] transition-colors' : variant === 'delete' ? 'bg-[#EC5757] text-[#FFFFFF] hover:bg-[#FF9797] transition-colors' : 'bg-[#7C5DFA] text-[#FFFFFF] hover:bg-[#9277FF] transition-colors')}
+                ${className || ''}
             `}
         >
             {variant === 'invoice' &&
