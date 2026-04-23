@@ -59,7 +59,7 @@ const Detail = () => {
                     <div className={`flex items-center justify-center gap-2 rounded-md w-[6.5rem] py-[0.8rem] font-bold text-[0.94rem] 
                         ${invoice.status === 'Paid' ? 'bg-[#33D69F0F] text-[#33D69F]' :
                             invoice.status === 'Pending' ? 'bg-[#FF8F000F] text-[#FF8F00]' :
-                                'bg-[#373B530F] text-[var(--color-text-primary)]'}`}>
+                                'bg-[#373B530F] dark:bg-[#DFE3FA0F] text-[#373B53] dark:text-[#DFE3FA]'}`}>
                         <span className={`w-2 h-2 rounded-full 
                             ${invoice.status === 'Paid' ? 'bg-[#33D69F]' :
                                 invoice.status === 'Pending' ? 'bg-[#FF8F00]' :
@@ -87,8 +87,8 @@ const Detail = () => {
                             </div>
                             <p className="font-medium text-[var(--color-text-accent)] text-[0.81rem]">{invoice.description}</p>
                         </div>
-                        <div className="flex justify-start md:justify-end items-center md:text-right">
-                            <p className="font-medium text-[var(--color-text-accent)] text-[0.81rem] text-end">
+                        <div className="flex justify-start md:justify-end items-center md:text-right mt-4 md:mt-0">
+                            <p className="font-medium text-[var(--color-text-accent)] text-[0.81rem] md:text-end">
                                 <span>{invoice.senderAddress.street}</span><br />
                                 <span>{invoice.senderAddress.city}</span><br />
                                 <span>{invoice.senderAddress.postCode}</span><br />

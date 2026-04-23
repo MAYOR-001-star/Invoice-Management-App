@@ -35,7 +35,6 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
       <h3 className="text-[#777F98] dark:text-[#7E88C3] text-[1.13rem] font-bold tracking-[-0.38px]">Item List</h3>
 
       <div className="flex flex-col gap-12 md:gap-4">
-        {/* Desktop Headers */}
         <div className="hidden md:grid grid-cols-[3fr_1fr_1.5fr_1fr_auto] gap-4 text-[var(--color-text-accent)] text-[0.81rem] font-medium px-1">
           <p>Item Name</p>
           <p>Qty.</p>
@@ -46,7 +45,6 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
 
         {items.map((item, index) => (
           <div key={index} className="grid grid-cols-[1fr_1.5fr_1fr_auto] md:grid-cols-[3fr_1fr_1.5fr_1fr_auto] gap-4 items-end md:items-center">
-            {/* Item Name - full width on mobile */}
             <div className="col-span-4 md:col-span-1">
               <Input
                 label="Item Name"
@@ -57,7 +55,6 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
               />
             </div>
 
-            {/* Quantity */}
             <div className="md:col-span-1">
               <Input
                 label="Qty."
@@ -69,7 +66,6 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
               />
             </div>
 
-            {/* Price */}
             <div className="md:col-span-1">
               <Input
                 label="Price"
@@ -81,7 +77,6 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
               />
             </div>
 
-            {/* Total Display */}
             <div className="flex flex-col gap-[0.63rem] h-full justify-end md:justify-center">
               <p className="text-[var(--color-text-accent)] text-[0.81rem] font-medium md:hidden mb-2">Total</p>
               <div className="h-[3rem] md:h-auto flex items-center">
@@ -91,7 +86,6 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
               </div>
             </div>
 
-            {/* Delete Button */}
             <div className="h-full flex items-end md:items-center pb-3 md:pb-0">
                 <button
                   type="button"

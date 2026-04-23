@@ -1,73 +1,38 @@
-# React + TypeScript + Vite
+# Invoice Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a fully functional invoice management application built with **React**, **TypeScript**, and **Tailwind CSS**. I built this to handle the entire lifecycle of an invoice, from creation and drafting to payment and deletion, with a strong focus on clean UI/UX and responsive design.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Full CRUD Support**: Create, read, update, and delete invoices seamlessly.
+- **Persistent Storage**: Uses LocalStorage to keep your data safe even after a browser refresh.
+- **Smart Filtering**: Quickly filter invoices by status (Draft, Pending, Paid).
+- **Responsive Design**: Optimized for mobile, tablet, and desktop screens with a specialized layout for each.
+- **Theme Switching**: Built-in support for Light and Dark modes with persistent user preference.
+- **Form Validations**: Comprehensive client-side validation for all fields to ensure data integrity.
+- **Interactive UI**: Smooth transitions, hover states, and intuitive navigation.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React 18
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Routing**: React Router DOM
+- **Icons**: Custom SVG icons
+- **State Management**: React Context & Hooks
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Design Decisions
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+I went with a **mobile-first** approach for the CSS to ensure the app is usable on any device. For the layout, I used a mix of **CSS Grid** and **Flexbox** to handle the complex invoice card structure on desktop vs mobile. The theme implementation uses CSS variables hooked into a React Context for a smooth, flicker-free transition between modes.

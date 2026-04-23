@@ -9,14 +9,14 @@ const Sidebar = () => {
                 <img src="/company-logo.svg" alt="company-logo" className=" h-[4.5rem] md:h-[5rem] lg:h-[6.44rem] w-auto" />
             </div>
             <div className="flex lg:flex-col justify-between items-center">
-                <div 
+                <div
                     onClick={toggleTheme}
                     className="mx-0 flex justify-center cursor-pointer hover:opacity-80 transition-opacity"
                 >
-                    <img 
-                        src={theme === 'light' ? "/theme-dark.svg" : "/theme-light.svg"} 
-                        alt="theme-toggler" 
-                        className="size-[1.5rem]" 
+                    <img
+                        src={theme === 'light' ? "/theme-dark.svg" : "/theme-light.svg"}
+                        alt="theme-toggler"
+                        className="size-[1.5rem]"
                     />
                 </div>
                 <div className=" w-[0.06rem] h-[4.5rem] md:h-[5rem] lg:w-[6.44rem] lg:h-[0.06rem] bg-[#979797] ml-[2rem] lg:ml-0 lg:mt-[2.01rem]"></div>

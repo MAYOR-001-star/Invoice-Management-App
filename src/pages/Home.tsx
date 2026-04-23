@@ -34,22 +34,22 @@ const Home = () => {
     }, [open]);
 
     const handleNewInvoice = () => setIsFormOpen(true);
-    
+
     const handleSubmit = (data: any) => {
         const newInvoice: Invoice = {
             ...data,
             id: generateId(),
-            status: "Pending" 
+            status: "Pending"
         };
         saveInvoice(newInvoice);
-        setInvoices(getInvoices()); 
+        setInvoices(getInvoices());
         setIsFormOpen(false);
     };
 
     const toggleFilter = (status: string) => {
-        setSelectedFilters(prev => 
-            prev.includes(status) 
-                ? prev.filter(s => s !== status) 
+        setSelectedFilters(prev =>
+            prev.includes(status)
+                ? prev.filter(s => s !== status)
                 : [...prev, status]
         );
     };
@@ -106,7 +106,7 @@ const Home = () => {
                                             >
                                                 {isActive && (
                                                     <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M1.5 4.5L3.83333 6.83333L8.5 1.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                                        <path d="M1.5 4.5L3.83333 6.83333L8.5 1.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                                     </svg>
                                                 )}
                                             </div>
@@ -120,20 +120,20 @@ const Home = () => {
                             </div>
                         )}
                     </div>
-                    <Button 
-                        text="New Invoice" 
-                        mobileText="New" 
-                        variant="invoice" 
-                        onClick={handleNewInvoice} 
+                    <Button
+                        text="New Invoice"
+                        mobileText="New"
+                        variant="invoice"
+                        onClick={handleNewInvoice}
                     />
                 </div>
             </div>
-            
+
             <InvoiceList invoices={filteredInvoices} />
 
-            <InvoiceForm 
-                isOpen={isFormOpen} 
-                onClose={() => setIsFormOpen(false)} 
+            <InvoiceForm
+                isOpen={isFormOpen}
+                onClose={() => setIsFormOpen(false)}
                 onSubmit={handleSubmit}
             />
         </div>

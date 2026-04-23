@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useMemo } from 'react';
 
 interface DatePickerProps {
   label: string;
-  value: string; // Expected format: YYYY-MM-DD
+  value: string;
   onChange: (e: any) => void;
 }
 
@@ -10,16 +10,13 @@ const DatePicker = ({ label, value, onChange }: DatePickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Parse initial date or fallback to today
   const selectedDate = useMemo(() => {
     return value ? new Date(value) : new Date();
   }, [value]);
 
-  // Track the month currently visible in the calendar
   const [viewDate, setViewDate] = useState(new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1));
 
   useEffect(() => {
-    // When value changes externally (e.g. form reset), update viewDate if not open
     if (!isOpen) {
       setViewDate(new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1));
     }
@@ -61,31 +58,24 @@ const DatePicker = ({ label, value, onChange }: DatePickerProps) => {
     if (isCurrentMonth) setIsOpen(false);
   };
 
-  // Generate days for the grid
   const days = useMemo(() => {
     const year = viewDate.getFullYear();
     const month = viewDate.getMonth();
     
-    // First day of current month
     const firstDay = new Date(year, month, 1).getDay();
-    // Days in current month
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    // Days in previous month
     const prevMonthDays = new Date(year, month, 0).getDate();
     
     const result = [];
     
-    // Preceding month's days
     for (let i = firstDay - 1; i >= 0; i--) {
       result.push({ day: prevMonthDays - i, current: false, offset: -1 });
     }
     
-    // Current month's days
     for (let i = 1; i <= daysInMonth; i++) {
       result.push({ day: i, current: true, offset: 0 });
     }
     
-    // Following month's days to fill the grid (usually 42 cells for 6 rows)
     const remaining = 42 - result.length;
     for (let i = 1; i <= remaining; i++) {
         result.push({ day: i, current: false, offset: 1 });
