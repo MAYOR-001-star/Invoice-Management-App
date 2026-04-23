@@ -86,14 +86,14 @@ const DatePicker = ({ label, value, onChange }: DatePickerProps) => {
 
   return (
     <div className="flex flex-col gap-[0.63rem] w-full relative group" ref={containerRef}>
-      <label className="text-[0.81rem] font-medium text-[var(--color-text-accent)] group-focus-within:text-[#7C5DFA] transition-colors">
+      <label className="text-[0.81rem] font-medium text-[var(--color-text-accent)] group-focus-within:text-[var(--color-primary)] transition-colors">
         {label}
       </label>
       
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer w-full bg-[var(--color-field-bg)] border border-[var(--color-field-border)] rounded-[4px] px-[1.25rem] py-[1.06rem] text-[var(--color-text-primary)] text-[0.94rem] font-bold flex justify-between items-center transition-all outline-none hover:border-[#7C5DFA] focus:border-[#7C5DFA]"
+        className="cursor-pointer w-full bg-[var(--color-field-bg)] border border-[var(--color-field-border)] rounded-[4px] px-[1.25rem] py-[1.06rem] text-[var(--color-text-primary)] text-[0.94rem] font-bold flex justify-between items-center transition-all outline-none hover:border-[var(--color-primary)] focus:border-[var(--color-primary)]"
       >
         <span>{formatDateDisplay(selectedDate)}</span>
         <img src="/calendar.svg" alt="calendar" className="w-[1rem] h-[1rem]" />
@@ -103,11 +103,11 @@ const DatePicker = ({ label, value, onChange }: DatePickerProps) => {
         <div className="absolute top-[calc(100%+0.5rem)] left-0 w-full bg-[var(--color-surface)] rounded-lg shadow-[0_10px_20px_rgba(72,84,159,0.25)] p-[1.5rem] z-20 animate-in fade-in zoom-in duration-200">
           <div className="flex justify-between items-center mb-[2rem]">
             <button type="button" onClick={() => changeMonth(-1)} className="hover:opacity-70 transition-opacity">
-               <svg width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 1l-4.2 4.2 4.2 4.2" stroke="#7C5DFA" strokeWidth="2" fill="none" /></svg>
+               <svg width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 1l-4.2 4.2 4.2 4.2" stroke="var(--color-primary)" strokeWidth="2" fill="none" /></svg>
             </button>
             <span className="text-[0.94rem] font-bold text-[var(--color-text-primary)]">{currentMonthLabel}</span>
             <button type="button" onClick={() => changeMonth(1)} className="hover:opacity-70 transition-opacity">
-                <svg width="7" height="11" viewBox="0 0 7 11"><path d="M1.6 1l4.2 4.2-4.2 4.2" stroke="#7C5DFA" strokeWidth="2" fill="none" /></svg>
+                <svg width="7" height="11" viewBox="0 0 7 11"><path d="M1.6 1l4.2 4.2-4.2 4.2" stroke="var(--color-primary)" strokeWidth="2" fill="none" /></svg>
             </button>
           </div>
 
@@ -123,9 +123,9 @@ const DatePicker = ({ label, value, onChange }: DatePickerProps) => {
                   key={idx}
                   type="button"
                   onClick={() => handleDateSelect(item.day, item.current, item.offset)}
-                  className={`text-[0.94rem] font-bold transition-colors hover:text-[#7C5DFA]
+                  className={`text-[0.94rem] font-bold transition-colors hover:text-[var(--color-primary)]
                     ${item.current ? 'text-[var(--color-text-primary)]' : 'text-[#DFE3FA] opacity-20'}
-                    ${isSelected ? 'text-[#7C5DFA]' : ''}
+                    ${isSelected ? 'text-[var(--color-primary)]' : ''}
                   `}
                 >
                   {item.day}

@@ -18,14 +18,14 @@ const Input = ({ label, error, hideLabel, hideLabelOnDesktop, ...props }: InputP
             <label 
               htmlFor={inputId} 
               className={`text-[0.81rem] font-medium transition-colors ${
-                error ? 'text-[#EC5757]' : 'text-[#7E88C3] group-focus-within:text-[#7C5DFA]'
+                error ? 'text-[var(--color-error)]' : 'text-[#7E88C3] group-focus-within:text-[var(--color-primary)]'
               }`}
             >
               {label}
             </label>
           )}
           {error && (
-            <span className="text-[#EC5757] text-[0.63rem] font-semibold tracking-[-0.21px]">
+            <span className="text-[var(--color-error)] text-[0.63rem] font-semibold tracking-[-0.21px]">
               {error}
             </span>
           )}
@@ -35,8 +35,8 @@ const Input = ({ label, error, hideLabel, hideLabelOnDesktop, ...props }: InputP
         id={inputId}
         className={`w-full bg-[var(--color-field-bg)] border rounded-[4px] px-[1.25rem] py-[1.06rem] text-[var(--color-text-primary)] text-[0.94rem] font-bold outline-none transition-all placeholder:text-[var(--color-text-primary)] placeholder:opacity-40
           ${error 
-            ? 'border-[#EC5757] focus:border-[#EC5757]' 
-            : 'border-[var(--color-field-border)] focus:border-[#7C5DFA] hover:border-[#7C5DFA]'
+            ? 'border-[var(--color-error)] focus:border-[var(--color-error)]' 
+            : 'border-[var(--color-field-border)] focus:border-[var(--color-primary)] hover:border-[var(--color-primary)]'
           }
         `}
         {...props}

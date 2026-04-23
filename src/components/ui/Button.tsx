@@ -16,9 +16,9 @@ const Button = ({ text, mobileText, onClick, variant, className }: ButtonProps) 
                 ${!className && (variant === 'invoice' ? 'p-[0.5em] pr-[1.06em] gap-4' : 'px-6 py-4')} 
                 ${!className && (
                     variant === 'edit' ? 'bg-[var(--color-faded-bg)] text-[var(--color-text-accent)] hover:bg-[var(--color-field-border)] transition-colors' : 
-                    variant === 'delete' ? 'bg-[#EC5757] text-[#FFFFFF] hover:bg-[#FF9797] transition-colors' : 
-                    variant === 'dark' ? 'bg-[#373B53] text-[#888EB0] hover:bg-[#0C0E16] transition-colors' :
-                    'bg-[#7C5DFA] text-[#FFFFFF] hover:bg-[#9277FF] transition-colors'
+                    variant === 'delete' ? 'bg-[var(--color-error)] text-[#FFFFFF] hover:bg-[var(--color-error-light)] transition-colors' : 
+                    variant === 'dark' ? 'bg-[#373B53] text-[var(--color-text-secondary)] hover:bg-[var(--color-text-primary)] transition-colors' :
+                    'bg-[var(--color-primary)] text-[#FFFFFF] hover:bg-[var(--color-primary-light)] transition-colors'
                 )}
                 ${className || ''}
             `}

@@ -100,8 +100,8 @@ const Home = () => {
                                             <div
                                                 className={`w-4 h-4 rounded-[2px] flex items-center justify-center border border-transparent transition-all
                                                     ${isActive
-                                                        ? "bg-[#7C5DFA] border-[#7C5DFA]"
-                                                        : "bg-[var(--color-field-border)] group-hover:border-[#7C5DFA]"
+                                                        ? "bg-[var(--color-primary)] border-[var(--color-primary)]"
+                                                        : "bg-[var(--color-field-border)] group-hover:border-[var(--color-primary)]"
                                                     }`}
                                             >
                                                 {isActive && (

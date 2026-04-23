@@ -15,7 +15,7 @@
   --color-primary: #7C5DFA;
   --color-primary-light: #9277FF;
   --color-error: #EC5757;
-  --color-error-light: #9277FF;
+  --color-error-light: #FF9797;
 }
 
 body {
@@ -30,7 +30,7 @@ body.dark {
   --color-surface: #1E2139;
   --color-text-primary: #FFFFFF;
   --color-text-secondary: #DFE3FA;
-  --color-text-accent: #DFE3FA;
+  --color-text-accent: #888EB0;
   --color-field-bg: #1E2139;
   --color-field-border: #252945;
   --color-faded-bg: #252945;

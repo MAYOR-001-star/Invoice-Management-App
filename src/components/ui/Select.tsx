@@ -30,7 +30,7 @@ const Select = ({ label, options, value, onChange }: SelectProps) => {
 
   return (
     <div className="flex flex-col gap-[0.63rem] w-full relative group" ref={containerRef}>
-      <label className="text-[0.81rem] font-medium text-[#7E88C3] group-focus-within:text-[#7C5DFA] transition-colors line-clamp-1">
+      <label className="text-[0.81rem] font-medium text-[#7E88C3] group-focus-within:text-[var(--color-primary)] transition-colors line-clamp-1">
         {label}
       </label>
       
@@ -43,8 +43,8 @@ const Select = ({ label, options, value, onChange }: SelectProps) => {
             setIsOpen(!isOpen);
           }
         }}
-        className={`w-full bg-[var(--color-field-bg)] border border-[var(--color-field-border)] rounded-[4px] px-[1.25rem] py-[1.06rem] text-[var(--color-text-primary)] text-[0.94rem] font-bold flex justify-between items-center transition-all outline-none hover:border-[#7C5DFA] focus:border-[#7C5DFA] ${
-          isOpen ? 'border-[#7C5DFA]' : ''
+        className={`w-full bg-[var(--color-field-bg)] border border-[var(--color-field-border)] rounded-[4px] px-[1.25rem] py-[1.06rem] text-[var(--color-text-primary)] text-[0.94rem] font-bold flex justify-between items-center transition-all outline-none hover:border-[var(--color-primary)] focus:border-[var(--color-primary)] ${
+          isOpen ? 'border-[var(--color-primary)]' : ''
         }`}
       >
         <span className="truncate">{selectedOption?.label || 'Select option'}</span>
@@ -65,8 +65,8 @@ const Select = ({ label, options, value, onChange }: SelectProps) => {
                 onChange(option.value);
                 setIsOpen(false);
               }}
-              className={`w-full text-left px-[1.5rem] py-[1rem] text-[0.94rem] font-bold border-b border-[var(--color-field-border)] last:border-b-0 hover:text-[#7C5DFA] transition-colors outline-none focus:bg-[var(--color-bg)] ${
-                option.value === value ? 'text-[#7C5DFA]' : 'text-[var(--color-text-primary)]'
+              className={`w-full text-left px-[1.5rem] py-[1rem] text-[0.94rem] font-bold border-b border-[var(--color-field-border)] last:border-b-0 hover:text-[var(--color-primary)] transition-colors outline-none focus:bg-[var(--color-bg)] ${
+                option.value === value ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-primary)]'
               }`}
             >
               {option.label}
