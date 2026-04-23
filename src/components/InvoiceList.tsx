@@ -30,7 +30,7 @@ const InvoiceList = ({ invoices }: InvoiceListProps) => {
                 <Link 
                     key={invoice.id} 
                     to={`/detail/${invoice.id}`}
-                    className="w-full bg-[var(--color-surface)] p-[1.5rem] md:px-[2rem] md:py-[1rem] rounded-lg shadow-sm border border-transparent hover:border-[#7C5DFA] transition-all grid grid-cols-2 md:grid-cols-[0.8fr_1.2fr_1.5fr_1fr_auto] items-center gap-y-4 md:gap-4 group"
+                    className="w-full bg-[var(--color-surface)] p-[1.5rem] md:px-[2rem] md:py-[1rem] rounded-lg shadow-sm border border-transparent hover:border-[var(--color-primary)] transition-all grid grid-cols-2 md:grid-cols-[0.8fr_1.2fr_1.5fr_1fr_auto] items-center gap-y-4 md:gap-4 group"
                 >
                     <p className="font-bold text-[0.94rem] text-[var(--color-text-primary)] md:order-1">
                         <span className="text-[var(--color-text-accent)]">#</span>{invoice.id}

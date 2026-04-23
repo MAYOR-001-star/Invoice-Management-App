@@ -11,6 +11,7 @@
   --color-field-bg: #FFFFFF;
   --color-field-border: #DFE3FA;
   --color-faded-bg: #F9FAFE;
+  --color-sidebar-bg: #373B53;
   
   --color-primary: #7C5DFA;
   --color-primary-light: #9277FF;
@@ -34,4 +35,5 @@ body.dark {
   --color-field-bg: #1E2139;
   --color-field-border: #252945;
   --color-faded-bg: #252945;
+  --color-sidebar-bg: #1E2139;
 }

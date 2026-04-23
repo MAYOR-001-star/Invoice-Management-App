@@ -125,6 +125,8 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
       formData.items.forEach((item, index) => {
         if (!item.name || !item.quantity || !item.price) {
           newErrors[`item-${index}`] = "All fields must be added";
+        } else if (Number(item.quantity) <= 0 || Number(item.price) <= 0) {
+          newErrors[`item-${index}-pos`] = "Quantity and price must be positive";
         }
       });
     }
@@ -279,8 +281,9 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
               {Object.values(errors).length > 0 && (
                   <div className="text-[#EC5757] text-[0.63rem] font-semibold flex flex-col gap-1">
                       {errors['items'] && <p>- {errors['items']}</p>}
-                      {Object.keys(errors).some(k => k.startsWith('item-')) && <p>- All fields must be added</p>}
-                      {Object.keys(errors).some(k => k.includes('.') || k === 'description') && <p>- All fields must be added</p>}
+                      {Object.keys(errors).some(k => k.startsWith('item-') && !k.endsWith('-pos')) && <p>- All fields must be added</p>}
+                      {Object.keys(errors).some(k => k.endsWith('-pos')) && <p>- Quantity and price must be positive</p>}
+                      {Object.keys(errors).some(k => (k.includes('.') || k === 'description') && !k.startsWith('item-')) && <p>- All fields must be added</p>}
                   </div>
               )}
           </div>

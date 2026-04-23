@@ -4,7 +4,7 @@ const Sidebar = () => {
     const { theme, toggleTheme } = GlobalContext();
 
     return (
-        <div className="bg-[#373B53] dark:bg-[#1E2139] fixed top-0 left-0 z-50 w-full h-[4.5rem] md:h-[5rem] lg:w-[6.44rem] lg:h-screen flex lg:flex-col justify-between items-center lg:rounded-r-[20px] transition-colors duration-300">
+        <div className="bg-[var(--color-sidebar-bg)] dark:bg-[var(--color-surface)] fixed top-0 left-0 z-50 w-full h-[4.5rem] md:h-[5rem] lg:w-[6.44rem] lg:h-screen flex lg:flex-col justify-between items-center lg:rounded-r-[20px] transition-colors duration-300">
             <div>
                 <img src="/company-logo.svg" alt="company-logo" className=" h-[4.5rem] md:h-[5rem] lg:h-[6.44rem] w-auto" />
             </div>

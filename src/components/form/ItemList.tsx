@@ -60,7 +60,7 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
                 label="Qty."
                 hideLabelOnDesktop={true}
                 type="number"
-                min="0"
+                min="1"
                 value={item.quantity}
                 onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
               />
@@ -72,6 +72,7 @@ const ItemList = ({ items, onChange }: ItemListProps) => {
                 hideLabelOnDesktop={true}
                 type="number"
                 step="0.01"
+                min="0.01"
                 value={item.price}
                 onChange={(e) => handleItemChange(index, 'price', e.target.value)}
               />
