@@ -59,11 +59,11 @@ const Detail = () => {
                     <div className={`flex items-center justify-center gap-2 rounded-md w-[6.5rem] py-[0.8rem] font-bold text-[0.94rem] 
                         ${invoice.status === 'Paid' ? 'bg-[#33D69F0F] text-[#33D69F]' :
                             invoice.status === 'Pending' ? 'bg-[#FF8F000F] text-[#FF8F00]' :
-                                'bg-[#373B530F] dark:bg-[#DFE3FA0F] text-[#373B53] dark:text-[#DFE3FA]'}`}>
+                                'bg-[#373B530F] dark:bg-[var(--color-field-border)] text-[#373B53] dark:text-[var(--color-text-secondary)]'}`}>
                         <span className={`w-2 h-2 rounded-full 
                             ${invoice.status === 'Paid' ? 'bg-[#33D69F]' :
                                 invoice.status === 'Pending' ? 'bg-[#FF8F00]' :
-                                    'bg-[#373B53] dark:bg-[#DFE3FA]'}`} />
+                                    'bg-[#373B53] dark:bg-[var(--color-text-secondary)]'}`} />
                         <span>{invoice.status}</span>
                     </div>
                 </div>
@@ -156,7 +156,7 @@ const Detail = () => {
                     </div>
                 </div>
 
-                <div className="bg-[#373B53] dark:bg-[#0C0E16] rounded-b-lg p-[1.5rem] md:px-[2rem] md:py-[1.5rem] flex items-center justify-between text-white transition-colors duration-300">
+                <div className="bg-[var(--color-sidebar-bg)] dark:bg-[#0C0E16] rounded-b-lg p-[1.5rem] md:px-[2rem] md:py-[1.5rem] flex items-center justify-between text-white transition-colors duration-300">
                     <p className="text-[0.81rem] font-medium">
                         <span className="md:hidden">Total</span>
                         <span className="hidden md:inline">Amount Due</span>

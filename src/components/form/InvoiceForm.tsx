@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Input from '../ui/Input';
 import Select from '../ui/Select';
 import DatePicker from '../ui/DatePicker';
@@ -34,6 +34,53 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
 
   const [formData, setFormData] = useState(emptyState);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+      
+      if (e.key === 'Tab' && isOpen) {
+        const focusableElements = modalRef.current?.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusableElements || focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0] as HTMLElement;
+        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+        if (e.shiftKey) { // Shift + Tab
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else { // Tab
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      // Small delay to ensure the modal is visible before focusing
+      const timer = setTimeout(() => {
+          (modalRef.current?.querySelector('input, button') as HTMLElement)?.focus();
+      }, 100);
+      return () => {
+          clearTimeout(timer);
+          document.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   useEffect(() => {
     if (initialData && isOpen) {
@@ -153,13 +200,18 @@ const InvoiceForm = ({ isOpen, onClose, onSubmit, initialData }: InvoiceFormProp
     <>
       <Backdrop isOpen={isOpen} onClick={onClose} />
       
-      <div className={`fixed top-[4.5rem] md:top-[5rem] lg:top-0 left-0 lg:left-[6.44rem] z-40 w-full max-w-[719px] h-[calc(100vh-4.5rem)] md:h-[calc(100vh-5rem)] lg:h-screen bg-[var(--color-bg)] transition-transform duration-500 ease-in-out transform ${
+      <div 
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="invoice-form-title"
+        className={`fixed top-[4.5rem] md:top-[5rem] lg:top-0 left-0 lg:left-[6.44rem] z-40 w-full max-w-[719px] h-[calc(100vh-4.5rem)] md:h-[calc(100vh-5rem)] lg:h-screen bg-[var(--color-bg)] transition-transform duration-500 ease-in-out transform ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       } shadow-2xl overflow-hidden lg:rounded-r-[20px]`}>
         
         <div className="h-full flex flex-col pt-[1rem] md:pt-[2rem] lg:pt-[3.5rem]">
           <div className="flex-1 overflow-y-auto px-[1.5rem] md:px-[2.5rem] lg:px-[3.5rem] pb-[2rem]">
-            <h2 className="text-[var(--color-text-primary)] text-[1.5rem] font-bold tracking-[-0.5px] uppercase mb-[3rem]">
+            <h2 id="invoice-form-title" className="text-[var(--color-text-primary)] text-[1.5rem] font-bold tracking-[-0.5px] uppercase mb-[3rem]">
               {initialData ? (
                 <>Edit <span className="text-[#7E88C3]">#</span>{initialData.id}</>
               ) : 'New Invoice'}
